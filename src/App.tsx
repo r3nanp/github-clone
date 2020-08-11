@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import Profile from './pages/Profile';
 import Repo from './pages/Repo';
 
+import GlobalStyles from './styles/GlobalStyles';
+
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +20,8 @@ function App() {
       </Routes>
 
       <Footer />
+
+      <GlobalStyles />
     </BrowserRouter>
   );
 }
