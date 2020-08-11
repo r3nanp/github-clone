@@ -13,7 +13,7 @@ const Profile: React.FC = () => {
           <ProfileData
             username={'r3nanp'}
             name={'Renan Pereira'}
-            avatarUrl={'https://avatars3.githubusercontenhttps://avatars3.githubusercontent.com/u/47953339?s=400&u=05e4e77779f7fdc2f7c033089fb58b1bf4bd7231&v=4t.com/u/47953339?s=460&v=4'}
+            avatarUrl={'https://avatars3.githubusercontent.com/u/47953339?s=400&u=05e4e77779f7fdc2f7c033089fb58b1bf4bd7231&v=4t.com/u/47953339?s=460&v=4'}
             followers={50}
             following={23}
             company={undefined}
@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
                   description={'Um clone do Twitter feito em ReactJS, projeto resultado do UI Clone da Rocketseat.'}
                   language={n % 3 === 0 ? 'Javascript' : 'Typescript'}
                   stars={0}
-                  forks={1}
+                  forks={2}
                 />
 
               ))}

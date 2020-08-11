@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container, Topside, RepoIcon, Botside } from './styles';
+import { Container, Topside, RepoIcon, Botside, StarIcon, ForkIcon } from './styles';
 
 interface RepoCardProps {
   username: string;
@@ -40,8 +40,12 @@ const RepoCard: React.FC<RepoCardProps> = ({
             <span>{language}</span>
           </li>
           <li>
-
-
+            <StarIcon />
+            <span>{stars}</span>
+          </li>
+          <li>
+            <ForkIcon />
+            <span>{forks}</span>
           </li>
         </ul>
       </Botside>
