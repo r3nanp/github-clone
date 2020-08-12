@@ -7,5 +7,5 @@ A clone of Github made with ReactJS.
 * react-calendar-heatmap
 
 
-### Link 
-[https://r3nanp-github-clone.netlify.app/](Website)
+### Link
+(Website)[https://r3nanp-github-clone.netlify.app/]
