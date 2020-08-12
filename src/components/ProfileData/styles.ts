@@ -39,9 +39,11 @@ export const Flex = styled.div`
 export const Avatar = styled.img`
   width: 16%;
   border-radius: 50%;
+  z-index: 3;
   
   @media (min-width: 768px) {
     width: 100%;
+    margin-top: -34px;
   }
 `;
 
@@ -74,10 +76,10 @@ export const Column = styled.ul`
   }
 
   li + li {
-    margin-top: 14px;
+    margin-top: 10px;
   }
   span {
-    margin-left: 15px;
+    margin-left: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
