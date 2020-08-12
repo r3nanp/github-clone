@@ -8,4 +8,4 @@ A clone of Github made with ReactJS.
 
 
 ### Link
-(Website)[https://r3nanp-github-clone.netlify.app/]
+[Website](https://r3nanp-github-clone.netlify.app/)
