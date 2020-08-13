@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import {
    Container,
@@ -12,27 +12,17 @@ import {
    GithubIcon
  } from './styles';
 
- import { APIRepo } from '../../@types';
-
-interface Data {
-  repo?: APIRepo;
-  error?: string;
-}
-
 const Repo: React.FC = () => {
-  const { username, reponame } = useParams();
-  const [data, setData] = useState<Data>();
-
   return (
     <Container>
       <BreadCrumb>
         <RepoIcon />
-        <Link className={'username'} to={`/${username}`}>
+        <Link className={'username'} to={`/r3nanp`}>
           r3nanp
         </Link>
         <span>/</span>
 
-        <Link className={'reponame'} to={`/${username}/${reponame}`}>
+        <Link className={'reponame'} to={`/r3nanp/twitter-clone`}>
           twitter-clone
         </Link>
       </BreadCrumb>
