@@ -79,6 +79,10 @@ export const Tab = styled.div`
     align-items: center;
     width: min-content;
     
+    position: sticky;
+    top: 0!important;
+    z-index: 100;
+    
     padding: 14px 16px;
     border-bottom: 1px solid var(--orange);
 
@@ -90,7 +94,7 @@ export const Tab = styled.div`
 
     .number {
       font-size: 12px;
-      background: var(--ticker);
+      background-color: var(--ticker);
       padding: 2px 6px;
       border-radius: 24px;
     }
@@ -109,6 +113,7 @@ export const Tab = styled.div`
 
     .content {
       margin: 0 auto;
+      
       position: sticky;
       top: 0!important;
       z-index: 100;
