@@ -13,7 +13,7 @@ export const Container = styled.div`
   }
 `;
 
-export const BreadCrumb = styled.div`
+export const Breadcrumb = styled.div`
   margin-bottom: 16px;
 
   display: flex;
