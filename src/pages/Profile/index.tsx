@@ -57,7 +57,7 @@ const Profile: React.FC = () => {
     return <h1>{data.error}</h1>;
   }
 
-  if (!data?.user || data?.repos) {
+  if (!data?.user || !data?.repos) {
     return <h1>Loading...</h1>
   }
 
@@ -77,7 +77,7 @@ const Profile: React.FC = () => {
           <TabContent />
         </div>
     
-        <span className="line" />
+        <span className="line"/>
       </Tab>
       <Main>
         <LeftSide>
