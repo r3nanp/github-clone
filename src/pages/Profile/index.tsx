@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { 
@@ -15,11 +15,12 @@ import {
 import ProfileData from '../../components/ProfileData';
 import RepoCard from '../../components/RepoCard';
 import RandomCalendar from '../../components/RandomCalendar';
-import LoadingPage from '../../components/LoadingPage';
+// import LoadingPage from '../../components/LoadingPage';
 
 import { APIUser, APIRepo } from '../../@types';
+import { useFetch } from '../../hooks/useFetch';
 
-interface Data {
+interface DataProps {
   user?: APIUser;
   repos?: APIRepo[];
   error?: string;
@@ -27,39 +28,16 @@ interface Data {
 
 const Profile: React.FC = () => {
   const { username = 'r3nanp' } = useParams();
-  const [data, setData] = useState<Data>();
 
-  useEffect(() => {
-    Promise.all([
-      fetch(`https://api.github.com/users/${username}`),
-      fetch(`https://api.github.com/users/${username}/repos`),
-    ]).then(async (responses) => {
-      const [userResponse, reposResponse] = responses;
+  const { data } = useFetch<DataProps>(`https://api.github.com/users/${username}`);
+  const { data: repos } = useFetch<DataProps>(`https://api.github.com/users/${username}/repos`);
 
-      if (userResponse.status === 404) {
-        setData({ error: 'User not found!' });
-        return;
-      }
+  // if (data?.error) {
+  //   return <h1>{data.error}</h1>
+  // }
 
-      const user = await userResponse.json();
-      const repos = await reposResponse.json();
-
-      const shuffledRepos = repos.sort(() => 0.5 - Math.random());
-      const slicedRepos = shuffledRepos.slice(0, 6);
-
-      setData({
-        user,
-        repos: slicedRepos,
-      });
-    });
-  }, [username]);
-
-  if(data?.error) {
-    return <h1>{data.error}</h1>;
-  }
-
-  if (!data?.user || !data?.repos) {
-    return <LoadingPage/>
+  if (!data?.user || !repos?.repos) {
+    return <p>Carregando</p>
   }
 
   const TabContent = () => (
@@ -102,21 +80,21 @@ const Profile: React.FC = () => {
           </Tab>
 
           <Repos>
-            <h2>Random Repos</h2>
+          <h2>Random Repos</h2>
 
-            <div>
-              {data.repos.map((item) => (
-                <RepoCard
-                  key={item.name}
-                  username={item.owner.login}
-                  reponame={item.name}
-                  description={item.description}
-                  language={item.language}
-                  stars={item.stargazers_count}
-                  forks={item.forks}
-                />
-              ))}
-            </div>
+          <div>
+            {repos.repos.map((item) => (
+              <RepoCard
+                key={item.name}
+                username={item.owner.login}
+                reponame={item.name}
+                description={item.description}
+                language={item.language}
+                stars={item.stargazers_count}
+                forks={item.forks}
+              />
+            ))}
+          </div>
           </Repos>
           <CalendarHeading>
             Random calendar (do not represent actual data)

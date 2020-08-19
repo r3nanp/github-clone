@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import LoadingPage from '../../components/LoadingPage';
 
@@ -14,6 +14,7 @@ import {
 } from './styles';
 
 import { APIRepo } from '../../@types';
+import { useFetch } from '../../hooks/useFetch';
 
 interface Data {
   repo?: APIRepo;
@@ -22,19 +23,7 @@ interface Data {
 
 const Repo: React.FC = () => {
   const { username, reponame } = useParams();
-  const [data, setData] = useState<Data>();
-
-  useEffect(() => {
-    fetch(`https://api.github.com/repos/${username}/${reponame}`).then(
-      async (response) => {
-        setData(
-          response.status === 404
-            ? { error: 'Repository not found!' }
-            : { repo: await response.json() }
-        );
-      }
-    );
-  }, [reponame, username]);
+  const { data } = useFetch<Data>(`https://api.github.com/repos/${username}/${reponame}`)
 
   if (data?.error) {
     return <h1>{data.error}</h1>;
