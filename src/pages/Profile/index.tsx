@@ -1,7 +1,7 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React from 'react'
+import { useParams } from 'react-router-dom'
 
-import { 
+import {
   Container,
   Main,
   LeftSide,
@@ -9,36 +9,40 @@ import {
   Repos,
   CalendarHeading,
   RepoIcon,
-  Tab
- } from './styles';
+  Tab,
+} from './styles'
 
-import ProfileData from '../../components/ProfileData';
-import RepoCard from '../../components/RepoCard';
-import RandomCalendar from '../../components/RandomCalendar';
-// import LoadingPage from '../../components/LoadingPage';
+import ProfileData from '../../components/ProfileData'
+import RepoCard from '../../components/RepoCard'
+import RandomCalendar from '../../components/RandomCalendar'
+import LoadingPage from '../../components/LoadingPage'
 
-import { APIUser, APIRepo } from '../../@types';
-import { useFetch } from '../../hooks/useFetch';
+import { APIUser, APIRepo } from '../../@types'
+import { useFetch } from '../../hooks/useFetch'
 
 interface DataProps {
-  user?: APIUser;
-  repos?: APIRepo[];
-  error?: string;
+  user?: APIUser
+  repos?: APIRepo[]
+  error?: string
 }
 
 const Profile: React.FC = () => {
-  const { username = 'r3nanp' } = useParams();
+  const { username = 'r3nanp' } = useParams()
 
-  const { data } = useFetch<DataProps>(`https://api.github.com/users/${username}`);
-  const { data: repos } = useFetch<DataProps>(`https://api.github.com/users/${username}/repos`);
+  const { data } = useFetch<DataProps>(
+    `https://api.github.com/users/${username}`
+  )
 
-  // if (data?.error) {
-  //   return <h1>{data.error}</h1>
-  // }
+  const { data: repos } = useFetch<DataProps>(
+    `https://api.github.com/users/${username}/repos`
+  )
 
   if (!data?.user || !repos?.repos) {
-    return <p>Carregando</p>
+    return <LoadingPage /> 
   }
+
+  const shuffledRepos = repos.repos.sort(() => 0.5 - Math.random())
+  const slicedRepos = shuffledRepos.slice(0, 6)
 
   const TabContent = () => (
     <div className="content">
@@ -46,17 +50,17 @@ const Profile: React.FC = () => {
       <span className="label">Repositories</span>
       <span className="number">{data.user?.public_repos}</span>
     </div>
-  );
-  
+  )
+
   return (
     <Container>
       <Tab className="desktop">
         <div className="wrapper">
-          <span className="offset"/>
+          <span className="offset" />
           <TabContent />
         </div>
-    
-        <span className="line"/>
+
+        <span className="line" />
       </Tab>
       <Main>
         <LeftSide>
@@ -80,21 +84,21 @@ const Profile: React.FC = () => {
           </Tab>
 
           <Repos>
-          <h2>Random Repos</h2>
+            <h2>Random Repos</h2>
 
-          <div>
-            {repos.repos.map((item) => (
-              <RepoCard
-                key={item.name}
-                username={item.owner.login}
-                reponame={item.name}
-                description={item.description}
-                language={item.language}
-                stars={item.stargazers_count}
-                forks={item.forks}
-              />
-            ))}
-          </div>
+            <div>
+              {slicedRepos.map(item => (
+                <RepoCard
+                  key={item.name}
+                  username={item.owner.login}
+                  reponame={item.name}
+                  description={item.description}
+                  language={item.language}
+                  stars={item.stargazers_count}
+                  forks={item.forks}
+                />
+              ))}
+            </div>
           </Repos>
           <CalendarHeading>
             Random calendar (do not represent actual data)
@@ -103,7 +107,7 @@ const Profile: React.FC = () => {
         </RightSide>
       </Main>
     </Container>
-  );
+  )
 }
 
-export default Profile;
+export default Profile

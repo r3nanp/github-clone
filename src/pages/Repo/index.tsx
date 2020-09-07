@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import LoadingPage from '../../components/LoadingPage';
+import React from 'react'
+import { Link, useParams } from 'react-router-dom'
+import LoadingPage from '../../components/LoadingPage'
 
 import {
   Container,
@@ -11,26 +11,28 @@ import {
   ForkIcon,
   LinkButton,
   GithubIcon,
-} from './styles';
+} from './styles'
 
-import { APIRepo } from '../../@types';
-import { useFetch } from '../../hooks/useFetch';
+import { APIRepo } from '../../@types'
+import { useFetch } from '../../hooks/useFetch'
 
 interface Data {
-  repo?: APIRepo;
-  error?: string;
+  repo?: APIRepo
+  error?: string
 }
 
 const Repo: React.FC = () => {
-  const { username, reponame } = useParams();
-  const { data } = useFetch<Data>(`https://api.github.com/repos/${username}/${reponame}`)
+  const { username, reponame } = useParams()
+  const { data } = useFetch<Data>(
+    `https://api.github.com/repos/${username}/${reponame}`
+  )
 
   if (data?.error) {
-    return <h1>{data.error}</h1>;
+    return <h1>{data.error}</h1>
   }
 
   if (!data?.repo) {
-    return <LoadingPage/>;
+    return <LoadingPage />
   }
 
   return (
@@ -69,7 +71,7 @@ const Repo: React.FC = () => {
         <span>View on GitHub</span>
       </LinkButton>
     </Container>
-  );
-};
+  )
+}
 
-export default Repo;
+export default Repo
