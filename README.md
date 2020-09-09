@@ -1,5 +1,6 @@
 ## github-clone
-⚡ A clone of Github made with ReactJS.
+⚡ A clone of Github made with ReactJS. <br />
+![r3nanp](https://img.shields.io/badge/r3nanp-github--clone-blue)
 
 ### Libraries used
 * react-router-dom
